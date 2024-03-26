@@ -1,6 +1,11 @@
 import React from 'react';
-import Post from './components/Post';
+import { useState } from 'react';
+import PostForm from './components/PostForm'
+import Feed from './components/Feed';
+
 function App(){ 
+  let [feedData, setFeedData] = useState([])
+
   return(
     <div>
       <h1>Fakebook!</h1>
@@ -8,9 +13,8 @@ function App(){
         {/* CreatePostForm */}
         
         {/* Feed */}
-        
-        <Post content="This is a test post!"/>
-        <Post content="This is another test post!"/>
+        <PostForm/>
+        <Feed data={feedData} />
     
     </div>
   )
