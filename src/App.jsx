@@ -5,7 +5,9 @@ import Feed from './components/Feed';
 
 function App(){ 
   let [feedData, setFeedData] = useState([])
-
+  let handleNewSubmission = (data) =>{
+    setFeedData([...feedData,data])
+  }
   return(
     <div>
       <h1>Fakebook!</h1>
@@ -13,8 +15,8 @@ function App(){
         {/* CreatePostForm */}
         
         {/* Feed */}
-        <PostForm/>
-        <Feed data={feedData} />
+        <PostForm onNewSubmit={handleNewSubmission}/>
+        <Feed posts={feedData} />
     
     </div>
   )
