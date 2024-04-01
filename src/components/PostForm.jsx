@@ -12,7 +12,8 @@ function PostForm(props){
 
         }
         else{
-            props.onNewSubmit((author,content))
+            //props.onNewSubmit((author,content))
+            props.onNewSubmit({author,content})
             setAuthor("")
             setContent("")
 
