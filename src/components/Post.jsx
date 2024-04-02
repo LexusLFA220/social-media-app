@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
 import Comment from './Comment';
-function Post(props){
- /* let renderPosts = () => {
-    //turn array of data into JSX components
 
-    return Fdata.map((data)=>{
-        return<Post author ={data.author} content={data.content}/>
-    })
+function ReplyForm(props){
+  const [reply, setReply] = useState("")
+return(
+  <form onSubmit ={(event)=>{
+    event.preventDefault()
+    props.onNewReply(reply)
+  } } >
+    <textarea placeholder='Add your comment!' onChange={(event) =>{
+      setReply(event.target.value)
+    
+    }} value={reply}/>
+  <input type="submit" />
+
+  </form>
+)
 }
-*/
+
+function ReplyList(props){
+let renderList = () =>{
+  return props.data.map((data) =>{
+    return <p> {data} </p>
+         })
+}
+return(
+  <div>
+    {renderList()}
+  </div>
+)
+
+}
+
+function Post(props){
+
+  let [replies,setReplies] = useState([])
 
     const [likes, setLikes] = useState(0);
     function handleLike(){
         setLikes(likes +1);
       }
+  let handleReply = (reply) => {
+    setReplies([...replies,reply])
+  }
 
   return(
     <div>
@@ -23,11 +52,14 @@ function Post(props){
       <p></p>
       <p>Likes: {likes}</p>
       <button onClick={handleLike}>Like</button>
-      <p>Comments:</p>
-      <Comment content="This is a test comment!"  />
-      <Comment content="This is another test comment!"  />
-      <Comment content="This is yet another test comment!"  />
-    
+      
+    <div>
+      <h4>Comments:</h4>
+      <ReplyForm onNewReply={handleReply}/>
+      <ReplyList data = {replies}/>
+     <Comment/>
+    </div>
+
     </div>
   )
 }
